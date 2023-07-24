@@ -33,8 +33,30 @@ pipeline {
           '''
           }
         }
-
-
+        stage('Kubernetes Setup') {
+            steps {
+                  git credentialsId: '5ab742e1-eb62-48ae-a975-82e6691a9f49'
+                  url: 'https://github.com/kkushagra6/k8s.git'
+                  branch: 'main'
+                  }
+        }
+        stage('Update k8s mainfest file') {
+          steps{
+           script{
+                    withCredentials([usernamePassword(credentialsId: '5ab742e1-eb62-48ae-a975-82e6691a9f49', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                        sh '''
+                        cat deploy.yaml
+                        sed -i '' "s/19/${BUILD_NUMBER}/g" deploy.yaml
+                        cat deploy.yaml
+                        git add deploy.yaml
+                        git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
+                        git remote -v
+                        git push https://github.com/kkushagra6/k8s.git  HEAD:main
+                        '''                        
+                    }
+                }
+          }
+        }
 
  
     }
