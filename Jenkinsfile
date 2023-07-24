@@ -54,7 +54,6 @@ pipeline {
                         git add deploy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
                         git branch -M main
-                        git remote add origin https://github.com/kkushagra6/k8s.git
                         git push -u origin main
                         '''                        
                     }
