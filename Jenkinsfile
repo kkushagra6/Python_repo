@@ -43,18 +43,16 @@ pipeline {
         stage('Update k8s mainfest file') {
           steps{
            script{
-                    withCredentials([usernamePassword(credentialsId: '5ab742e1-eb62-48ae-a975-82e6691a9f49', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN']) {
                         sh '''
                         cat deploy.yaml
 	                sed -i 's/docker_argo_k8s:[0-9]*/docker_argo_k8s:${BUILD_NUMBER}/' deploy.yaml
                         cat deploy.yaml
-                        
                         git config --global user.email "kkushagra6@gmail.com"
                         git config --global user.name "kkushagra6"
                         git add deploy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
-                        git branch -M main
-                        git push -u origin main
+                        git push https://${GITHUB_TOKEN}@github.com/kkushagra6/k8s HEAD:main
                         '''                        
                     }
                 }
