@@ -53,8 +53,9 @@ pipeline {
                         git config --global user.name "kkushagra6"
                         git add deploy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
-                        git remote -v
-                        git push
+                        gir branch -M main
+                        git remote add origin https://github.com/kkushagra6/k8s.git
+                        git push -u origin main
                         '''                        
                     }
                 }
