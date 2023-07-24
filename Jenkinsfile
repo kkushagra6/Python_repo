@@ -3,6 +3,8 @@ pipeline {
     agent any 
     
     environment {
+        GITHUB_USERNAME = credentials('5ab742e1-eb62-48ae-a975-82e6691a9f49').username
+        GITHUB_ACCESS_TOKEN = credentials('5ab742e1-eb62-48ae-a975-82e6691a9f49').password
         IMAGE_VERSION = "${BUILD_NUMBER}"
         DOCKER_REGISTRY_CREDENTIALS = credentials('docker-registry-credentials')
     }
@@ -48,12 +50,13 @@ pipeline {
                         cat deploy.yaml
 	                sed -i 's/docker_argo_k8s:[0-9]*/docker_argo_k8s:${BUILD_NUMBER}/' deploy.yaml
                         cat deploy.yaml
-                        git config --global user.email "kkushagra6@gmail.com"
-                        git config --global user.name "kushagra"
+                        
+                        git config --global user.email "jenkins@example.com"
+                        git config --global user.name "jenkins"
                         git add deploy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
                         git remote -v
-                        git push https://github.com/kkushagra6/k8s.git  HEAD:main
+                        git push https://${GITHUB_USERNAME}:${GITHUB_ACCESS_TOKEN}@github.com/kkushagra6/k8s.git  HEAD:main
                         '''                        
                     }
                 }
