@@ -15,5 +15,15 @@ pipeline {
                 '''
            }
         }
+        stage("Docker Build"){
+          steps{
+            sh '''
+            echo "Building Docker Image"
+            docker build -t kkushagra6/docker_argo_k8s:{$EMAGE_VERSION}
+            ls -lrt
+            '''
+          }
+
+        }
     }
 }
