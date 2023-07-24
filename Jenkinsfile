@@ -48,6 +48,8 @@ pipeline {
                         cat deploy.yaml
 	                sed -i 's/docker_argo_k8s:[0-9]*/docker_argo_k8s:${BUILD_NUMBER}/' deploy.yaml
                         cat deploy.yaml
+                        git config --global user.email "kkushagra6@gmail.com"
+                        git config --global user.name "kushagra"
                         git add deploy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
                         git remote -v
