@@ -43,7 +43,7 @@ pipeline {
         stage('Update k8s mainfest file') {
           steps{
            script{
-                    withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN']) {
+                    withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
                         sh '''
                         cat deploy.yaml
 	                sed -i 's/docker_argo_k8s:[0-9]*/docker_argo_k8s:${BUILD_NUMBER}/' deploy.yaml
