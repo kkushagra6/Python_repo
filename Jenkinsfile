@@ -47,6 +47,7 @@ pipeline {
                         sh '''
                         cat deploy.yaml
                         sed -i '' "s/19/${BUILD_NUMBER}/g" deploy.yaml
+	               sed 's/kkushagra6\/docker_argo_k8s:[0-9]*/kkushagra6\/docker_argo_k8s:${BUILD_NUMBER}/' deploy.yaml
                         cat deploy.yaml
                         git add deploy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
