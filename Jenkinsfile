@@ -3,8 +3,6 @@ pipeline {
     agent any 
     
     environment {
-        GITHUB_USERNAME = credentials('5ab742e1-eb62-48ae-a975-82e6691a9f49').username
-        GITHUB_ACCESS_TOKEN = credentials('5ab742e1-eb62-48ae-a975-82e6691a9f49').password
         IMAGE_VERSION = "${BUILD_NUMBER}"
         DOCKER_REGISTRY_CREDENTIALS = credentials('docker-registry-credentials')
     }
@@ -56,7 +54,7 @@ pipeline {
                         git add deploy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
                         git remote -v
-                        git push https://${GITHUB_USERNAME}:${GITHUB_ACCESS_TOKEN}@github.com/kkushagra6/k8s.git  HEAD:main
+                        git push https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@github.com/kkushagra6/k8s.git  HEAD:main
                         '''                        
                     }
                 }
