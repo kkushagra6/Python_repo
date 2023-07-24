@@ -54,8 +54,7 @@ pipeline {
                         git add deploy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
                         git remote -v
-                        echo $GIT_PASSWORD
-                        git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/kkushagra6/k8s.git
+                        git push
                         '''                        
                     }
                 }
