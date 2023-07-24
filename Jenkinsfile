@@ -35,8 +35,8 @@ pipeline {
         }
         stage('Kubernetes Setup') {
             steps {
-                  git credentialsId: '5ab742e1-eb62-48ae-a975-82e6691a9f49'
-                  url: 'https://github.com/kkushagra6/k8s.git'
+                  git credentialsId: '5ab742e1-eb62-48ae-a975-82e6691a9f49',
+                  url: 'https://github.com/kkushagra6/k8s.git',
                   branch: 'main'
                   }
         }
