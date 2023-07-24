@@ -19,7 +19,7 @@ pipeline {
           steps{
             sh '''
             echo "Building Docker Image"
-            docker build -t kkushagra6/docker_argo_k8s:${IMAGE_VERSION}
+            docker build -t kkushagra6/docker_argo_k8s:${IMAGE_VERSION} .
             ls -lrt
             '''
           }
