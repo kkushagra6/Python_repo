@@ -47,7 +47,7 @@ pipeline {
                         sh '''
                         cat deploy.yaml
                         BUILD_NUMBER=${BUILD_NUMBER}
-	                sed -i 's/docker_argo_k8s:[0-9]*/docker_argo_k8s:${BUILD_NUMBER}/' deploy.yaml
+                        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deploy.yaml
                         cat deploy.yaml
                         git config --global user.email "kkushagra6@gmail.com"
                         git config --global user.name "kkushagra6"
