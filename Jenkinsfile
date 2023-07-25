@@ -46,6 +46,7 @@ pipeline {
                     withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
                         sh '''
                         cat deploy.yaml
+                        BUILD_NUMBER=${BUILD_NUMBER}
 	                sed -i 's/docker_argo_k8s:[0-9]*/docker_argo_k8s:${BUILD_NUMBER}/' deploy.yaml
                         cat deploy.yaml
                         git config --global user.email "kkushagra6@gmail.com"
